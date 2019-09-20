@@ -1,22 +1,6 @@
-1st Idea - Shopping - ingredients where to buy it - what do you want  - amazon buying or list of where to get ingredients - Instead input home ingredients and recommend recipes based on that
+Project Idea 1:
+Having a bad day? Hungry, Hangry, or just want something to eat to cheer you up? Our app plans to solve 1st world problems with cooking. Yes, with your own two hands. All you need to do to start using is to log in through your social media account, whichever it may be. After you’ve been authenticated, our app will run a facial recognition and match your expression with our facial recognition API. Then, you’ll need to input the current ingredients you have on you - whether it be a full fledged kitchen or ramen noodles. Based on your mood and ingredients we have, our app will recommend a recipe for you to cook. If you’re missing ingredients that the recipe suggests, don’t worry! Our app will provide the nearest locations for you to buy the rest of it so you can get cooking.
 
-Find Emotion
-Input Ingredients
-Recipes with majority of listed
-Gives location where to buy rest of ingredients
-Name:
-
-
-Project Req - 
-Has to utilize a database
-It has to correlate 2 data sets from APIs - Text to your phone doesn't count
-Must have two sets of data - do something with it and then spit it out
-Google maps doesn't count...
-3rd party authentication
-
-2nd Idea - When is the cheapest ticket to buy/travel
-Get the prices of rental cars, hotels, and flights with all 3 at once
-Different prices for the times of the year
-Choice list/calendar view of how much each thing will cost
-API’s for hotels, cars, and airplane costs.
-Name:
+Project Idea 2:
+This app is basically your personal Baymax(Big Hero 6). It is so easy to forget to take your medication. Our app will keep track and remind you. What’s more, we will give you a clear list of foods that you cannot eat with your medication. The app also supports online shopping and searching for meds. If you don’t feel like going to the doctor, try our app to consult a doctor online. 
+API: MyTelemedicine + Walgreens Pharmacy Prescription Refill + ApiMedic Symptom Checker + iHealth API + Google Map + DrugBank etc.
