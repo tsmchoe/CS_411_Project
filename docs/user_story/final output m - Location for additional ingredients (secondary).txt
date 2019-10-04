@@ -1,0 +1,1 @@
+In addition to the final output, the recipes that are missing ingredients have a text display next to them that indicate how many ingredients are missing/still needed and how far they need to go to buy it. (i.e. "3 Additional ingredients needed, found 100 feet away").
