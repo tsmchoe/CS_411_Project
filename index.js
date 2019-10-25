@@ -24,7 +24,9 @@ function main(){
     if(data && data.length > 0) {
         list = ['<ul>'];
         for(i=0,l=data.length; i<l; i++) {
-              list.push('<li data-id="' + data[i].id + '">' + data[i].title + '</li>');
+			  list.push('<li data-id="' + data[i].id + '">' + data[i].title + '</li>');
+			  list.push('<img src="'+data[i].image+'">');
+			  list.push();
             }
         list.push('</ul>');
         $('#similar').html(list.join(''));
