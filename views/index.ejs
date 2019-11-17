@@ -1,0 +1,32 @@
+<% if (!user) { %>
+  <div style="width:500px;height:180px;">
+    <h2 style="font-size:40px;">Welcome! Please log in.</h2>
+    <a href="/auth/facebook"><img src="fb-login.jpg" width="151" height="24"></a>
+    </div>
+<% } else { %>
+    <section class="top">
+
+		<nav>
+			<div id="navContainer">
+				<a href="index.html" id="logo">CS411</a>
+			</div>
+		</nav>
+
+			<div id="formContainer">
+				<p id="inputFields" >
+					<span id='formTitle'>Ingredients</span>
+					<br>
+					<br>
+					<input id="ingredientsInput" class="input" placeholder="What's in your fridge?"></input>
+					<br>
+					<button type="submit" id="search" onclick="main()" data-loading-text="Loading...">Search</button>
+				</p>
+			</div>
+
+
+			<div id="similar"></div>
+
+		</section>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script src='index.js'></script>
+<% } %>
