@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="">
+<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
+<head>
+<title>CS411</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="/css/layout" rel="stylesheet" type="text/css" media="all">
+<style type="text/css">
+/* DEMO ONLY */
+.container .demo{text-align:center;}
+.container .demo div{padding:8px 0;}
+.container .demo div:nth-child(odd){color:#FFFFFF; background:#CCCCCC;}
+.container .demo div:nth-child(even){color:#FFFFFF; background:#979797;}
+@media screen and (max-width:900px){.container .demo div{margin-bottom:0;}}
+/* DEMO ONLY */
+</style>
+</head>
+<body id="top">
+<div class="wrapper row0">
+  <div id="topbar" class="hoc clear">
+    <div class="fl_left">
+    </div>
+    <div class="fl_right">
+      <ul class="nospace">
+        <li><a href="#">Login</a></li>
+        <li><a href="#">Register</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="wrapper row1">
+  <header id="header" class="hoc clear">
+    <div id="logo" class="fl_left">
+      <h1><a href="/">CS411 Project</a></h1>
+    </div>
+    <nav id="mainav" class="fl_right">
+      <ul class="clear">
+        <li> <a href="/">Home</a> </li>
+        <li><a href="/recipe">Recipe</a>
+        </li>
+        <li><a href="/detectFaces">Emotion Detect</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+</div>
+<div class="bgded overlay" style="background-image:url('http://www.exclusivepaints.com/wp-content/uploads/2017/03/assorted-paint-colors-abstract-header.jpg');">
+  <div id="breadcrumb" class="hoc clear">
+  </div>
+</div>
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <div class="content">
+      <h2>About</h2>
+      <div class="group btmspace-50 demo">
+        Our group chose to use Node.js and demonstrated calling the Spoonacular API, mainly due to it being one of the best and readily avaliable recipie APIs. We were originally going to use the food2fork API because it had a simplified version of what we needed, but it ended being taken down by the site managers so we could no longer use it. We tried to look for other API's but many of them had the same error as food2fork, which was that they were going to be taken down before we could fully utilize it. In the end, we found that Spoonacular, was one of the only recipie API's available. We chose to use Node.js specifically because it was the one we were most familiar with.
+      </div>
+    </div>
+    <!-- / main body -->
+    <div class="clear"></div>
+  </main>
+</div>
+<div class="wrapper row4">
+  <footer id="footer" class="hoc clear">
+  </footer>
+</div>
+<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script src="../layout/scripts/jquery.min.js"></script>
+<script src="../layout/scripts/jquery.backtotop.js"></script>
+<script src="../layout/scripts/jquery.mobilemenu.js"></script>
+</body>
+</html>
