@@ -9,25 +9,21 @@ const express         =     require('express')
   , mysql             =     require('mysql')
   , unirest           =     require('unirest')
   , app               =     express()
-  
 
-
-
-
- 
 
 //LOAD API Keys from ENV file
 const spoonAPIK = process.env.DB_SPOON;
 const faceAPIK = process.env.DB_FACE;
 
 
-//Define MySQL parameter in Config.js file.
+//Defined MySQL parameter in Config.js file.
 const pool = mysql.createPool({
   host     : config.host,
   user     : config.username,
   password : config.password,
   database : config.database
 });
+
 
 // Passport session setup.
 passport.serializeUser(function(user, done) {
@@ -40,35 +36,45 @@ passport.deserializeUser(function(obj, done) {
 
 
 // Use the FacebookStrategy within Passport.
+var prof_id = null;
+var prev_ing = null;
 
 passport.use(new FacebookStrategy({
     clientID: config.facebook_api_key,
     clientSecret:config.facebook_api_secret ,
-    callbackURL: config.callback_url
+    callbackURL: config.callback_url,
+    profileFields: ['id', 'displayName', 'email']
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
       //Check whether the User exists or not using profile.id
       if(config.use_database) {
-        // if sets to true
-        pool.query("SELECT * from user_info where user_id="+profile.id, (err,rows) => {
+        prof_id = profile.id;
+        pool.query("SELECT * from user where user_id="+profile.id, (err,rows) => {
           if(err) throw err;
           if(rows && rows.length === 0) {
               console.log("There is no such user, adding now");
-              pool.query("INSERT into user_info(user_id,user_name) VALUES('"+profile.id+"','"+profile.username+"')");
+              pool.query("INSERT into user(user_id,user_name) VALUES('"+profile.id+"','"+profile.displayName+"')");
           } else {
               console.log("User already exists in database");
-          }
+
+              // Gets ingredient history for you
+            pool.query("SELECT user.ingredient_his from user", function(err, result, fields){
+            if (err) throw err;
+            console.log(result[0].ingredient_his);
+            prev_ing = result[0].ingredient_his;
         });
       }
       return done(null, profile);
-    });
-  }
-));
+      });
+      }}
+    )}
+  ));
+
+// Setting up the page and OAuth
 var engine = require('consolidate')
 
 app.set('views', __dirname + '/views');
-//app.engine('html', engine.mustache)
 app.set('view engine', 'ejs');
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -77,10 +83,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/views'));
 
-
 app.get('/', function(req, res){
-  console.log("Server is running")
-  res.render('index', { user: req.user });
+  res.render('index', { user: req.user, hist_ing: prev_ing});
 });
 
 app.get('/account', ensureAuthenticated, function(req, res){
@@ -107,9 +111,6 @@ app.get("/test", function(req, res){
 })
 
 
-
-
-
 //Beginning of API Calls
 var upToIngredients = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=';
 var afterIngredients = spoonAPIK;
@@ -119,7 +120,7 @@ var bigEmotionIngredient;
 
 
 app.get('/recipes', function(req, res) {
-  
+  // Detecting emotion
   function first(callback){
       faceLink = req.query.faceLink;
       var detectAPI = unirest("POST", "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect");
@@ -181,9 +182,15 @@ app.get('/recipes', function(req, res) {
   }
 
   function second(){
+  // Detecting ingredient
       const ingredient = req.query.ingredient.replace(/[ ,]+/g, ",") ;
 
-      console.log("The ingredient is: " + ingredient); 
+      console.log("The ingredient is: " + ingredient);
+
+      // Stores last ingredient used
+      pool.query("SELECT * from user where user_id="+prof_id, (err,rows) => {
+        pool.query("UPDATE user SET ingredient_his = ('"+ingredient+"')");
+      });
 
       var requestString = upToIngredients + ingredient + "," + bigEmotionIngredient + afterIngredients;
       
